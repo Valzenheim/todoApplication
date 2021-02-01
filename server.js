@@ -14,8 +14,14 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use('/app/todoApp', require('./routes/task.routes'));
 app.use('/app/auth', require('./routes/auth.routes'));
 
+app.post('/ping', (req,res) => {
+  res.status(200).json({trata:'ratata'})
+})
+
 //обслуживание html
+
 app.get('/*', function (req, res) {
+  console.log('tratata')
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 app.listen(port);

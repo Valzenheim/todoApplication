@@ -55,6 +55,8 @@ router.post(
     async (req, res) => {
     try{
 
+        console.log('logintratatata')
+
         const errors = validationResult(req);
 
          if ( !errors.isEmpty() ){
