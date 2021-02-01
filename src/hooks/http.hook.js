@@ -11,6 +11,7 @@ export const useHttp = () => {
         body = JSON.stringify(body);
         headers['Content-Type'] = 'application/json';
       }
+
       if (token) {
         headers.Authorization = `Bearer ${token}`;
       }
