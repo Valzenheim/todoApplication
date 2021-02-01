@@ -6,22 +6,16 @@ const port = process.env.PORT || 8080;
 const app = express();
 
 //здесь наше приложение отдаёт статику
-app.use(express.json({ extended: true }));
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
 
 //простой тест сервера
-app.use('/app/todoApp', require('./routes/task.routes'));
-app.use('/app/auth', require('./routes/auth.routes'));
-
-app.post('/ping', (req,res) => {
-  res.status(200).json({trata:'ratata'})
-})
+app.get('/ping', function (req, res) {
+  return res.send('pong');
+});
 
 //обслуживание html
-
 app.get('/*', function (req, res) {
-  console.log('tratata')
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 app.listen(port);
