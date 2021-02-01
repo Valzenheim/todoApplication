@@ -6,6 +6,8 @@ const port = process.env.PORT || 8080;
 const app = express();
 
 //здесь наше приложение отдаёт статику
+app.use(express.json({ extended: true }));
+
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
 
