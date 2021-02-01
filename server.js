@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 //простой тест сервера
 app.get('/ping', function (req, res) {
-  return res.send('pong');
+  return res.send.json('pong');
 });
 
 //обслуживание html
