@@ -46,7 +46,7 @@ export const RegisterPage = () => {
       password: form.password,
     };
 
-    const data = await request('/createUser', 'post', userData);
+    const data = await request('/app/auth/createUser', 'post', userData);
     return auth.login(data.token, data.userId, data.userName, data.filter);
   };
 

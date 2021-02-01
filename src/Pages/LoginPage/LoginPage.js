@@ -30,7 +30,7 @@ export const LoginPage = () => {
       return setError('Wrong user data. Please try again');
     }
 
-    const data = await request('/ping', 'get');
+    const data = await request('/app/auth/login', 'get');
     return auth.login(data.token, data.userId, data.userName, data.filter);
   };
 
