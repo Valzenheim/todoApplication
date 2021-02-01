@@ -7,7 +7,7 @@ const app = express();
 
 //здесь наше приложение отдаёт статику
 app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, 'frontend', 'build')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 //простой тест сервера
 app.get('/ping', function (req, res) {
@@ -16,6 +16,6 @@ app.get('/ping', function (req, res) {
 
 //обслуживание html
 app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 app.listen(port);
