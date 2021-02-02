@@ -4,12 +4,13 @@ import { useHttp } from '../../hooks/http.hook';
 import './style/LoginStyle.css';
 import { AuthContext } from '../../Context/AuthContext';
 
-export const LoginPage = () => {
+export default function LoginPage() {
   const auth = useContext(AuthContext);
   const { request, backError, clearError } = useHttp();
   const [error, setError] = useState(null);
   const [form, setForm] = useState({
-    login: '', password: '',
+    login: '',
+    password: '',
   });
 
   const changeHandler = (event) => {
@@ -18,20 +19,20 @@ export const LoginPage = () => {
 
   const loginHandler = async () => {
     clearError();
-    if (
-      !/[0-9a-zA-Zа-яёА-ЯЁ]/i.test(form.login)
-            && !/[0-9a-zA-Zа-яёА-ЯЁ]/i.test(form.password)
-    ) {
-      setForm({
-        ...form,
-        login: '',
-        password: '',
-      });
+
+    if (form.login === '' && form.password === '') {
       return setError('Wrong user data. Please try again');
     }
 
-    const data = await request('/app/auth/login', 'POST', { ...form });
-    return auth.login(data.token, data.userId, data.userName, data.filter);
+    const data = await request('/app/auth/login', 'post', { ...form });
+
+    auth.login(data.token, data.userId, data.userName, data.filter);
+
+    return setForm({
+      ...form,
+      login: '',
+      password: '',
+    });
   };
 
   return (
@@ -72,4 +73,4 @@ export const LoginPage = () => {
       <div className="errorHolder">{backError || error}</div>
     </div>
   );
-};
+}

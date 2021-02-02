@@ -5,7 +5,7 @@ import { AuthContext } from '../../Context/AuthContext';
 import './style/regStyle.css';
 import back from '../../images/arrow-left-solid.svg';
 
-export const RegisterPage = () => {
+export default function RegisterPage() {
   const auth = useContext(AuthContext);
   const { request, backError, clearError } = useHttp();
   const [error, setError] = useState(null);
@@ -27,18 +27,8 @@ export const RegisterPage = () => {
   const registerHandler = async () => {
     clearError();
 
-    if (
-      !/[0-9a-zA-Zа-яёА-ЯЁ]/i.test(form.login)
-            && !/[0-9a-zA-Zа-яёА-ЯЁ]/i.test(form.password)
-            && form.password !== form.confirm
-    ) {
-      setForm({
-        ...form,
-        login: '',
-        password: '',
-        confirm: '',
-      });
-      return setError('Wrong user data.');
+    if (form.password !== form.confirm) {
+      return setError('Passwords don\'t match');
     }
 
     const userData = {
@@ -46,8 +36,16 @@ export const RegisterPage = () => {
       password: form.password,
     };
 
-    const data = await request('/app/auth/createUser', 'post', userData);
-    return auth.login(data.token, data.userId, data.userName, data.filter);
+    const data = await request('app/auth/createUser', 'post', userData);
+
+    auth.login(data.token, data.userId, data.userName, data.filter);
+
+    return setForm({
+      ...form,
+      login: '',
+      password: '',
+      confirm: '',
+    });
   };
 
   return (
@@ -66,9 +64,7 @@ export const RegisterPage = () => {
         <Link to="/sign_in">
           <img className="backImg" src={back} alt={back} />
         </Link>
-        <div className="pageHeader" id="regHeader">
-          registration
-        </div>
+        <div className="pageHeader" id="regHeader">registration</div>
         <input
           className="inputForm"
           name="login"
@@ -99,13 +95,9 @@ export const RegisterPage = () => {
           value={form.btnStatus ? 'hide password' : 'show password'}
           onClick={btnStatusHandler}
         />
-        <button type="button" id="btn2" className="btn" onClick={registerHandler}>
-          register
-        </button>
+        <button type="button" id="btn2" className="btn" onClick={registerHandler}>register</button>
       </div>
-      <div className="errorHolder">
-        {backError || error}
-      </div>
+      <div className="errorHolder">{backError || error}</div>
     </div>
   );
-};
+}
