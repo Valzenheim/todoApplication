@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useHttp } from '../../hooks/http.hook';
 import './style/LoginStyle.css';
-import AuthContext from '../../Context/AuthContext';
+import { AuthContext } from '../../Context/AuthContext';
 
 export default function LoginPage() {
   const auth = useContext(AuthContext);

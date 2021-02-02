@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useHttp } from '../../hooks/http.hook';
-import AuthContext from '../../Context/AuthContext';
+import { AuthContext } from '../../Context/AuthContext';
 import './style/regStyle.css';
 import back from '../../images/arrow-left-solid.svg';
 
