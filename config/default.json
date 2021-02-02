@@ -1,0 +1,5 @@
+{
+"port": 8080,
+"mongoUri": "mongodb+srv://Valzeheim:1q2w3e4r@cluster0.gggqb.mongodb.net/todoApp?retryWrites=true&w=majority",
+"jwtSecret": "ololo"
+}
