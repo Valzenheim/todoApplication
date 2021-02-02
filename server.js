@@ -3,22 +3,15 @@ const express = require('express');
 const config = require('config');
 const path = require('path')
 
-
 const app = express();
 
 app.use(express.json({ extended: true }));
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
 
-//простой тест сервера
-app.get('/ping', function (req, res) {
-  return res.send('pong');
-});
-
-
 app.use('/app/todoApp', require('./routes/task.routes'));
 app.use('/app/auth', require('./routes/auth.routes'));
-//обслуживание html
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
