@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {useHistory} from 'react-router-dom';
-import AuthContext from '../../../Context/AuthContext';
+import { AuthContext } from '../../../Context/AuthContext';
 import logout from '../../../images/sign-out-alt-solid.svg';
 
 export default function Header() {
