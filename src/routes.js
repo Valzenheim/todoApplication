@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import { LoginPage } from './Pages/LoginPage/LoginPage';
-import { RegisterPage } from './Pages/RegisterPage/RegisterPage';
-import { TodoApp } from './Pages/TodoApp/TodoApp';
+import LoginPage from './Pages/LoginPage/LoginPage';
+import RegisterPage from './Pages/RegisterPage/RegisterPage';
+import TodoApp from './Pages/TodoApp/TodoApp';
 
 export const pagination = (isAuth) => {
   if (isAuth) {
