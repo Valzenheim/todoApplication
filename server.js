@@ -6,8 +6,6 @@ const path = require('path')
 const app = express();
 
 app.use(express.json({ extended: true }));
-app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/app/todoApp', require('./routes/task.routes'));
 app.use('/app/auth', require('./routes/auth.routes'));
@@ -35,6 +33,9 @@ async function start(){
 }
 
 start();
+
+app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
