@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useHttp } from '../../hooks/http.hook';
-import { AuthContext } from '../../Context/AuthContext';
+import AuthContext from '../../Context/AuthContext';
 import './style/regStyle.css';
 import back from '../../images/arrow-left-solid.svg';
 
@@ -17,18 +17,29 @@ export default function RegisterPage() {
   });
 
   const changeHandler = (event) => {
-    setForm({ ...form, [event.target.name]: event.target.value });
+    return setForm({ ...form, [event.target.name]: event.target.value });
   };
 
   const btnStatusHandler = () => {
-    setForm({ ...form, btnStatus: !form.btnStatus });
+    return setForm({ ...form, btnStatus: !form.btnStatus });
   };
 
   const registerHandler = async () => {
     clearError();
 
-    if (form.password !== form.confirm) {
-      return setError('Passwords don\'t match');
+    if (
+      !/[0-9a-zA-Zа-яёА-ЯЁ]/i.test(form.login)
+            && !/[0-9a-zA-Zа-яёА-ЯЁ]/i.test(form.password)
+            && form.password !== form.confirm
+    ) {
+      setForm({
+        ...form,
+        login: '',
+        password: '',
+        confirm: '',
+      });
+
+      return setError('Wrong user data.');
     }
 
     const userData = {
@@ -38,14 +49,7 @@ export default function RegisterPage() {
 
     const data = await request('app/auth/createUser', 'post', userData);
 
-    auth.login(data.token, data.userId, data.userName, data.filter);
-
-    return setForm({
-      ...form,
-      login: '',
-      password: '',
-      confirm: '',
-    });
+    return auth.login(data.token, data.userId, data.userName, data.filter);
   };
 
   return (
@@ -55,6 +59,8 @@ export default function RegisterPage() {
       </div>
       <div
         className="regPage"
+        role="button"
+        aria-hidden="true"
         onKeyPress={(event) => {
           if (event.key === 'Enter') {
             registerHandler();
