@@ -12,10 +12,6 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use('/app/todoApp', require('./routes/task.routes'));
 app.use('/app/auth', require('./routes/auth.routes'));
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
 const PORT = process.env.PORT || config.get('port');
 
 async function start(){
@@ -39,3 +35,7 @@ async function start(){
 }
 
 start();
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
