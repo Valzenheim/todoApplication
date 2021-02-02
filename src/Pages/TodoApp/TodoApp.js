@@ -73,9 +73,9 @@ export default function TodoApp() {
   const localItemRemover = (item) => {
     const tasks = taskArray.filter((x) => x._id !== item);
 
-    counter()
+    setTaskArray(tasks);
 
-    return setTaskArray(tasks);
+    counter()
   };
 
   const addingNewTask = async () => {
