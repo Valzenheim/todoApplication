@@ -6,8 +6,8 @@ const path = require('path')
 const app = express();
 
 app.use(express.json({ extended: true }));
-app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(__dirname));
+// app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/app/todoApp', require('./routes/task.routes'));
 app.use('/app/auth', require('./routes/auth.routes'));
